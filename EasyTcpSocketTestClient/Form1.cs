@@ -28,6 +28,12 @@ namespace EasyTcpSocketTestClient
                 return;
             }
 
+            if (!int.TryParse(serverPort.Text, out int intServerPort))
+            {
+                MessageBox.Show("请输入正确的值");
+                return;
+            }
+
             if (!int.TryParse(threadCount.Text, out int intThreadCount))
             {
                 MessageBox.Show("请输入正确的值");
@@ -38,8 +44,8 @@ namespace EasyTcpSocketTestClient
             {
                 string client = $"client{ClientSocketList.Keys.Count + 1}";
 
-                TcpSocketClient clientSocket = new TcpSocketClient("127.0.0.1", 3333, Event_ReceivedMessage);
-                if (clientSocket.Connect(out string errorMessage))
+                TcpSocketClient clientSocket = new TcpSocketClient(Event_ReceivedMessage);
+                if (clientSocket.Connect(serverIP.Text, intServerPort, out string errorMessage))
                 {
                     ClientSocketList.TryAdd(client, clientSocket);
                     clientList.Items.Add(client);

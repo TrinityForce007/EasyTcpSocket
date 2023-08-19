@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyTcpSocket
 {
@@ -19,12 +14,19 @@ namespace EasyTcpSocket
         /// 接收到的数据包
         /// </summary>
         private SocketTcpPack Pack = new SocketTcpPack();
-        private Socket ClientSocket;
-        private readonly IPAddress ServerIP;
-        private readonly int ServerPort;
 
-        public TcpSocketClient(string serverIp, int serverPort, Event_ReceivedMessage _onReceivedMessage)
+        private Socket ClientSocket;
+
+        public TcpSocketClient(Event_ReceivedMessage _onReceivedMessage)
         {
+            OnReceivedMessage = _onReceivedMessage;
+        }
+
+        public bool Connect(string serverIp, int serverPort, out string errorMessage)
+        {
+            bool result = false;
+            errorMessage = "";
+
             if (!IPAddress.TryParse(serverIp, out IPAddress ipAddress))
             {
                 throw new ArgumentException("无效的ip");
@@ -35,20 +37,11 @@ namespace EasyTcpSocket
                 throw new ArgumentException("无效的port");
             }
 
-            ServerIP = ipAddress;
-            ServerPort = serverPort;
-            OnReceivedMessage = _onReceivedMessage;
-        }
-
-        public bool Connect(out string errorMessage)
-        {
-            bool result = false;
-            errorMessage = "";
             Socket tempSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             try
             {
-                IPEndPoint endPoint = new IPEndPoint(ServerIP, ServerPort);
+                IPEndPoint endPoint = new IPEndPoint(ipAddress, serverPort);
                 tempSocket.Connect(endPoint);
 
                 if (tempSocket.Connected)
