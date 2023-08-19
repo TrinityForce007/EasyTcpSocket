@@ -40,10 +40,6 @@
             panel1 = new Panel();
             groupBox2 = new GroupBox();
             dataGridView1 = new DataGridView();
-            RN = new DataGridViewTextBoxColumn();
-            time = new DataGridViewTextBoxColumn();
-            clientID = new DataGridViewTextBoxColumn();
-            message = new DataGridViewTextBoxColumn();
             contextMenuStrip1 = new ContextMenuStrip(components);
             clearToolStripMenuItem = new ToolStripMenuItem();
             groupBox3 = new GroupBox();
@@ -58,6 +54,10 @@
             clientList = new ComboBox();
             richTextBox1 = new RichTextBox();
             panel2 = new Panel();
+            RN = new DataGridViewTextBoxColumn();
+            time = new DataGridViewTextBoxColumn();
+            clientID = new DataGridViewTextBoxColumn();
+            message = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -164,41 +164,17 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { RN, time, clientID, message });
             dataGridView1.ContextMenuStrip = contextMenuStrip1;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(3, 19);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(696, 410);
             dataGridView1.TabIndex = 0;
-            dataGridView1.RowPostPaint += dataGridView1_RowPostPaint;
-            // 
-            // RN
-            // 
-            RN.HeaderText = "序号";
-            RN.Name = "RN";
-            RN.ReadOnly = true;
-            // 
-            // time
-            // 
-            time.HeaderText = "时间";
-            time.Name = "time";
-            time.ReadOnly = true;
-            // 
-            // clientID
-            // 
-            clientID.HeaderText = "Client";
-            clientID.Name = "clientID";
-            clientID.ReadOnly = true;
-            // 
-            // message
-            // 
-            message.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            message.HeaderText = "内容";
-            message.Name = "message";
-            message.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -333,6 +309,33 @@
             panel2.Size = new Size(702, 432);
             panel2.TabIndex = 3;
             // 
+            // RN
+            // 
+            RN.HeaderText = "序号";
+            RN.Name = "RN";
+            RN.ReadOnly = true;
+            RN.Width = 79;
+            // 
+            // time
+            // 
+            time.HeaderText = "时间";
+            time.Name = "time";
+            time.ReadOnly = true;
+            time.Width = 150;
+            // 
+            // clientID
+            // 
+            clientID.HeaderText = "Client";
+            clientID.Name = "clientID";
+            clientID.ReadOnly = true;
+            // 
+            // message
+            // 
+            message.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            message.HeaderText = "内容";
+            message.Name = "message";
+            message.ReadOnly = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -377,13 +380,13 @@
         private ComboBox consecuteiveSendTimes;
         private Label label5;
         private Label f;
-        private DataGridViewTextBoxColumn RN;
-        private DataGridViewTextBoxColumn time;
-        private DataGridViewTextBoxColumn clientID;
-        private DataGridViewTextBoxColumn message;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem clearToolStripMenuItem;
         private Panel panel1;
         private Panel panel2;
+        private DataGridViewTextBoxColumn RN;
+        private DataGridViewTextBoxColumn time;
+        private DataGridViewTextBoxColumn clientID;
+        private DataGridViewTextBoxColumn message;
     }
 }

@@ -11,7 +11,7 @@ namespace EasyTcpSocket
     /// 接受消息
     /// </summary>
     public class ReceiveHelp
-    {   
+    {
         /// <summary>
         /// 接收到消息后触发的事件
         /// </summary>
@@ -48,8 +48,10 @@ namespace EasyTcpSocket
                     {
                         foreach (var item in Pack.DataList)
                         {
-                            //OnReceivedMessage.BeginInvoke(clientIP, item.Content, item.DataLength, CallBack_ReceivedMessage, null);
-                            OnReceivedMessage(clientIP, item.Content, item.DataLength);
+                            Task.Run(() =>
+                            {
+                                OnReceivedMessage(clientIP, item.Content, item.DataLength);
+                            });
                         }
                         Pack.Clear();
                     }

@@ -1,4 +1,5 @@
 using EasyTcpSocket;
+using System.Collections.Concurrent;
 using System.Text;
 
 namespace EasyTcpSocketTestClient
@@ -8,7 +9,7 @@ namespace EasyTcpSocketTestClient
         /// <summary>
         /// 客户端socket list
         /// </summary>
-        private Dictionary<string, TcpSocketClient> ClientSocketList = new Dictionary<string, TcpSocketClient>();
+        private ConcurrentDictionary<string, TcpSocketClient> ClientSocketList = new ConcurrentDictionary<string, TcpSocketClient>();
 
         public Form1()
         {
@@ -40,7 +41,7 @@ namespace EasyTcpSocketTestClient
                 TcpSocketClient clientSocket = new TcpSocketClient("127.0.0.1", 3333, Event_ReceivedMessage);
                 if (clientSocket.Connect(out string errorMessage))
                 {
-                    ClientSocketList.Add(client, clientSocket);
+                    ClientSocketList.TryAdd(client, clientSocket);
                     clientList.Items.Add(client);
                     AddRowToDataGrid(client, $"{client}连接成功");
                 }
@@ -53,11 +54,8 @@ namespace EasyTcpSocketTestClient
 
         private void Event_ReceivedMessage(string serverIP, byte[] content, int length)
         {
-            Task.Run(() =>
-            {
-                string str = Encoding.Default.GetString(content, 0, length);
-                AddRowToDataGrid(serverIP, $"收到{serverIP}的消息：{str}");
-            });
+            string str = Encoding.Default.GetString(content, 0, length);
+            AddRowToDataGrid(serverIP, $"收到{serverIP}的消息：{str}");
         }
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -141,7 +139,10 @@ namespace EasyTcpSocketTestClient
         {
             this.Invoke((MethodInvoker)delegate
             {
-                dataGridView1.Rows.Add(new string[] { (dataGridView1.Rows.Count).ToString(), $"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}", client, message });
+                dataGridView1.Rows.Add(new string[] { (dataGridView1.Rows.Count + 1).ToString(), $"{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}", client, message });
+                //自动滚动到最后一行
+                int lastRowIndex = dataGridView1.Rows.Count - 1;
+                dataGridView1.CurrentCell = dataGridView1.Rows[lastRowIndex].Cells[1];
             });
         }
 
@@ -156,12 +157,6 @@ namespace EasyTcpSocketTestClient
             {
                 dataGridView1.Rows.Clear();
             });
-        }
-
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            //dataGrid自动滚动到最底部
-            this.dataGridView1.FirstDisplayedScrollingRowIndex = this.dataGridView1.Rows.Count - 1;
         }
     }
 }

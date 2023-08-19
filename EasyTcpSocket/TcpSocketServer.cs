@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
+﻿using System.Collections.Concurrent;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Sockets;
 
 namespace EasyTcpSocket
 {
@@ -23,12 +19,12 @@ namespace EasyTcpSocket
         /// <summary>
         /// 客户端Socket列表
         /// </summary>
-        private Dictionary<string, Socket> _clientSocketList = new Dictionary<string, Socket>();
+        private ConcurrentDictionary<string, Socket> _clientSocketList = new ConcurrentDictionary<string, Socket>();
 
         /// <summary>
         /// 消息接收Buffer
         /// </summary>
-        private Dictionary<string, SocketTcpPack> _receiveBufferDic = new Dictionary<string, SocketTcpPack>();
+        private ConcurrentDictionary<string, SocketTcpPack> _receiveBufferDic = new ConcurrentDictionary<string, SocketTcpPack>();
 
         private readonly IPAddress ServerIP;
         private readonly int ServerPort;
@@ -61,7 +57,7 @@ namespace EasyTcpSocket
         /// <summary>
         /// 开始监听
         /// </summary>
-        public void StartListen()
+        public void Start()
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint endPoint = new IPEndPoint(ServerIP, ServerPort);
@@ -79,13 +75,16 @@ namespace EasyTcpSocket
             Socket socket = (Socket)result.AsyncState;
             Socket clientSocket = socket.EndAccept(result);
             string clientIP = clientSocket.RemoteEndPoint.ToString();
-            _clientSocketList.Add(clientIP, clientSocket);
 
-            //OnNewClientConncected.BeginInvoke(_clientSocketList.Keys.ToList<string>(), clientIP, CallBack_NewClientConncected, null);
-            OnNewClientConncected(_clientSocketList.Keys.ToList<string>(), clientIP);
+            _clientSocketList.TryAdd(clientIP, clientSocket);
+
+            Task.Run(() =>
+            {
+                OnNewClientConncected(_clientSocketList.Keys.ToList<string>(), clientIP);
+            });
 
             SocketTcpPack tcpPack = new SocketTcpPack(1024);
-            _receiveBufferDic.Add(clientIP, tcpPack);
+            _receiveBufferDic.TryAdd(clientIP, tcpPack);
 
             //开始接受客户端消息
             ReceiveHelp receive = new ReceiveHelp(_receiveBufferDic[clientIP], OnReceivedMessage);
@@ -93,11 +92,6 @@ namespace EasyTcpSocket
 
             //接受下一个连接
             socket.BeginAccept(AcceptConnect, socket);
-        }
-
-        private void CallBack_NewClientConncected(IAsyncResult ar)
-        {
-            OnNewClientConncected.EndInvoke(ar);
         }
 
         /// <summary>
