@@ -5,9 +5,9 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTcpSocket", "EasyTcpSocket\EasyTcpSocket.csproj", "{978AF6C8-293B-4ACC-8788-00F8873DAAEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_server", "test_server\test_server.csproj", "{67560A9E-2026-47FC-8C85-AB2CF0A702D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_server", "test_server\test_server.csproj", "{67560A9E-2026-47FC-8C85-AB2CF0A702D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_client", "test_client\test_client.csproj", "{E58D2A89-403A-4C0A-898E-B3BBA7C7B94B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTcpSocketTestClient", "EasyTcpSocketTestClient\EasyTcpSocketTestClient.csproj", "{D571746E-1AFB-47EC-A75D-A1EDECD3639B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{67560A9E-2026-47FC-8C85-AB2CF0A702D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67560A9E-2026-47FC-8C85-AB2CF0A702D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67560A9E-2026-47FC-8C85-AB2CF0A702D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E58D2A89-403A-4C0A-898E-B3BBA7C7B94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E58D2A89-403A-4C0A-898E-B3BBA7C7B94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E58D2A89-403A-4C0A-898E-B3BBA7C7B94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E58D2A89-403A-4C0A-898E-B3BBA7C7B94B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
