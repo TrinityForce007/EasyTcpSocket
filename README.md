@@ -2,6 +2,8 @@
 
 这个项目是本人边学边做的，目标是先写一套TcpSocket框架，再以此为基础，搭建一个SECS/GEM框架，会持续更新，仅供参考。
 
+**EasyTcpSocketTestClient**和**test_server**是我用这个框架写的测试客户端和测试服务端，目前一个服务端对应多个客户端同时收发消息没什么问题，也解决了粘包和分包的问题。
+
 ### 创建服务端
 ```
 string serverIp = "xxx";
