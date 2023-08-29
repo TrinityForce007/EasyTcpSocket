@@ -1,0 +1,9 @@
+﻿一个实体需要包含的功能
+	1. 建立TCP连接，进入Connected。
+	2. TCP连接终止时，进入Not Connected。
+	3. 发起和接受Select，进入Selected。
+	4. 发起和接受Deselect，进入Not Selected
+	5. LinkTest
+	6. 发送和接受Separate，终止HSMS通信，进入Not Selected。
+	7. Reject发送方的不恰当消息。
+	8. 正常的发送消息。

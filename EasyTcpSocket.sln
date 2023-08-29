@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTcpSocket", "EasyTcpSoc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_server", "test_server\test_server.csproj", "{67560A9E-2026-47FC-8C85-AB2CF0A702D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTcpSocketTestClient", "EasyTcpSocketTestClient\EasyTcpSocketTestClient.csproj", "{D571746E-1AFB-47EC-A75D-A1EDECD3639B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTcpSocketTestClient", "EasyTcpSocketTestClient\EasyTcpSocketTestClient.csproj", "{D571746E-1AFB-47EC-A75D-A1EDECD3639B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyHSMS", "EasyHSMS\EasyHSMS.csproj", "{FEC6C0DE-372B-4BFB-AEAD-A3F906D5810E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D571746E-1AFB-47EC-A75D-A1EDECD3639B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEC6C0DE-372B-4BFB-AEAD-A3F906D5810E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC6C0DE-372B-4BFB-AEAD-A3F906D5810E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC6C0DE-372B-4BFB-AEAD-A3F906D5810E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC6C0DE-372B-4BFB-AEAD-A3F906D5810E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

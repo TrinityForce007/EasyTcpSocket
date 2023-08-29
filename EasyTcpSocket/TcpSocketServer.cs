@@ -6,6 +6,16 @@ namespace EasyTcpSocket
 {
     public class TcpSocketServer
     {
+        private SessionContainer SessionContainer;
+
+        event AsyncEventHandler NewClientConnected;
+
+        event AsyncEventHandler<CloseEventArgs> ConnectionClosed;
+
+
+
+
+
         /// <summary>
         /// 有新客户端连接时触发的事件
         /// </summary>
@@ -48,6 +58,7 @@ namespace EasyTcpSocket
                 throw new ArgumentException("无效的port");
             }
 
+            SessionContainer = new SessionContainer();
             ServerIP = ipAddress;
             ServerPort = port;
             OnNewClientConncected += _onNewClientConncected;
